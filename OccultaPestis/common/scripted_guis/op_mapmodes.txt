@@ -1,0 +1,55 @@
+﻿# TODO more apt colors and expand
+op_pestilence_map = {
+	effect = {
+		if = {
+			limit = { NOT = { global_var:custom_map_mode = flag:op_pestilence_map } }
+			set_global_variable = {
+				name = custom_map_mode_changing
+				value = 1
+			}
+			set_global_variable = {
+				name = custom_map_mode
+				value = flag:op_pestilence_map
+			}
+			every_barony = {
+				if = {
+					limit = {
+						OR = {
+							title_province = { 
+								has_province_modifier = opModProvPestilenceQuarantine
+							}
+							#county = {		# just for debugging if the map mode even works
+							#	is_coastal_county = yes
+							#}
+							#is_holy_site = yes
+						}
+					}
+					set_color_from_title = title:k_himalaya	## orange-ish
+				}
+				else_if = {
+					limit = {
+						OR = {
+							title_province = { 
+								has_province_modifier = opModProvPestilenceMinor
+							}
+							#is_capital_barony = yes
+						}
+					}
+					set_color_from_title = title:k_kham	## red-ish
+				}
+				else = {
+					set_color_from_title = title:k_jerusalem	## white-ish
+				}
+			}
+			remove_global_variable = custom_map_mode_changing
+		}
+	}
+	is_shown = {
+		#exists = global_var:siro_g_initialize_complete
+		global_var:custom_map_mode = flag:op_pestilence_map
+	}
+	is_valid = {
+		NOT = { exists = global_var:custom_map_mode_changing }
+		#exists = global_var:siro_g_initialize_complete
+	}
+}

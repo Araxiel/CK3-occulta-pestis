@@ -1,0 +1,8 @@
+﻿l_english:
+
+#TODO
+opPestilence.002.t: "Strange Pestilence"
+opPestilence.002.desc: "A strange pestilence showed up in [infectedProvince.GetName]."
+opPestilence.002.a: "Let's hope it doesn't spread."
+opPestilence.002.b: "Quarantine the city." #TODO dynamic renaming of city/village/castle
+opPestilence.002.c: "Send the Court Physician"

@@ -1,0 +1,48 @@
+﻿on_game_start = {
+    on_actions = {
+        op_GameStart
+    }
+}
+
+op_GameStart = {
+    effect = {
+        debug_log = "op_GameStart fired"
+		set_global_variable = {
+            name = custom_map_mode
+            value = flag:none
+        }
+    }
+}
+
+random_yearly_playable_pulse = {
+    on_actions = {
+        op_ProvinceInfections
+        op_ProvinceWorsening
+    }
+}
+
+op_ProvinceInfections = {
+
+	trigger = {
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+    random_events = {
+        99 = 0
+        1 = opPestilence.002
+    }
+
+}
+
+op_ProvinceWorsening = {
+
+	trigger = {
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+    random_events = {
+        99 = 0
+        1 = opPestilence.002
+    }
+
+}

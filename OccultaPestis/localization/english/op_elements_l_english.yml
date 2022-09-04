@@ -1,0 +1,11 @@
+﻿l_english:
+
+#TODO
+opModProvPestilenceMinor: "Minor Black Pestilence"
+opModProvPestilenceMinor_desc: "Some people are dying due to a limited outbreak of the Black Pestilence"
+opModProvPestilenceQuarantine: "Pestilence Quarantine"
+opModProvPestilenceQuarantine_desc: "The city is under strict quarantine, making sure no one is leaving or entering."
+opModCountPestilenceQuarantineUs: "Pestilence Quarantine"
+opModCountPestilenceQuarantineUs_desc: "A city in the province got quarantined."
+OP_PESTILENCE_MAP: "Pestilence"
+OP_PESTILENCE_MAP_TOOLTIP: "Pestilence Map REPLACE_ME"

@@ -1,0 +1,21 @@
+﻿opModProvPestilenceMinor = {
+	icon = rat_negative
+	levy_size = -0.1
+	supply_limit_mult = -0.1
+	tax_mult = -0.05
+	garrison_size = -0.1
+	monthly_county_control_change_add = -0.1
+	development_growth_factor = small_development_growth_loss
+}
+
+opModProvPestilenceQuarantine = {
+	icon = county_modifier_control_negative 
+	tax_mult = -0.2
+	levy_size = -0.2
+	development_growth_factor = small_development_growth_loss
+} 
+
+opModCountPestilenceQuarantineUs = {
+	icon = county_modifier_control_negative 
+	county_opinion_add = -15
+} 

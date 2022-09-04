@@ -1,0 +1,281 @@
+﻿namespace = opPestilence
+
+#opPestilence.0002 = {
+#	hidden = yes
+#
+#	trigger = {
+#		scope:county = {
+#			NOT = { immune_to_county_corruption_trigger = yes }
+#		}
+#		#Holder still needs to be the same
+#		scope:county.holder = scope:corruption_holder
+#	}
+#
+#	immediate = {
+#		scope:county = {
+#			set_variable = {
+#				name = corruption_event_happening
+#				days = 1
+#			}
+#			add_random_county_corruption_in_debt_effect = yes
+#		}
+#	}
+#}
+
+#scripted_trigger validInfectionCounty = {
+#	tier = tier_county
+#	any_in_de_facto_hierarchy = {
+#		exists = title_province				# With at least one Barony...
+#		title_province = {
+#			OR = {
+#				has_holding_type = city_holding # ...which is a City
+#				has_holding_type = tribal_holding		# or a tribe
+#			}
+#			OR = {
+#				geographical_region = world_europe
+#				geographical_region = world_middle_east_jerusalem
+#				geographical_region = world_africa_north
+#			}
+#		}
+#	}
+#}
+
+# TODO; switch event based on if 'atra pestilentia' (black pestilence) is already well known or not
+
+# county holder gets first notified of unknown disease
+opPestilence.002 = {
+	type = character_event
+	title = opPestilence.002.t
+	desc = opPestilence.002.desc
+
+	cooldown = { years = 10 }
+
+	theme = secret
+	override_background = throne_room
+	left_portrait = {
+		character = ROOT
+		animation = disgust
+	}
+
+	trigger = {
+		NOT = {
+			any_realm_province = {
+				has_province_modifier = opModProvPestilenceMinor
+			}
+		}
+		any_realm_province = {
+			OR = {
+				geographical_region = world_europe
+				geographical_region = world_middle_east_jerusalem
+				geographical_region = world_africa_north
+			}
+			OR = {
+				has_holding_type = city_holding # ...which is a City
+				has_holding_type = tribal_holding		# or a tribe
+			}
+		}
+	}
+
+	immediate = {
+		random_realm_province = {
+			limit = {
+				OR = {
+					has_holding_type = city_holding # ...which is a City
+					has_holding_type = tribal_holding		# or a tribe
+				}
+			}
+			add_province_modifier = {
+				modifier = opModProvPestilenceMinor
+				days = 1095
+			}
+			save_scope_as = infectedProvince
+			save_scope_as = firstInfectedProvince
+		}
+		if = {
+			limit = {
+				employs_court_position = court_physician_court_position
+				any_court_position_holder = {
+					type = court_physician_court_position
+					is_available_ai_adult = yes
+				}
+			}
+			random_court_position_holder = {
+				type = court_physician_court_position
+				limit = {
+					is_available_ai_adult = yes
+				}
+				save_scope_as = physician
+			}
+		}
+	}
+
+	# let us hope it doesn't get worse
+	option = {
+		name = opPestilence.002.a
+
+	}
+
+	# quarantine the city
+	option = {
+		name = opPestilence.002.b
+		scope:infectedProvince = {
+			add_province_modifier = {
+				modifier = opModProvPestilenceQuarantine
+				days = 1095
+			}
+			county = {
+				add_county_modifier = {
+					modifier = opModCountPestilenceQuarantineUs
+				}
+			}
+		}
+	}
+
+	# send court physician to investigate
+	option = {
+		name = opPestilence.002.c
+
+		trigger = {
+			employs_court_position = court_physician_court_position
+			any_court_position_holder = {
+				type = court_physician_court_position
+				is_available_ai_adult = yes
+			}
+		}
+
+	}
+
+	## TODO trigger hidden event, and THAT one decides the next step
+	after = {
+		hidden_effect = {
+			trigger_event = {
+				id = opPestilence.003
+				years = 2
+			}
+		}
+	}
+}
+
+opPestilence.003 = {
+	hidden = yes
+
+	immediate = {
+		random_list = {
+			30 = {
+				modifier = {
+					scope:infectedProvince = {
+						has_province_modifier = opModProvPestilenceQuarantine
+					}
+					factor = 3
+				}
+				modifier = {
+					scope:infectedProvince = {
+						has_province_flag = opModPestilenceReduced
+					}
+					factor = 3
+				}
+			}
+			30 = {	# pestilence spreads
+				trigger_event = opPestilence.004
+			}
+			30 = {	# pestilence get's worse
+				trigger_event = opPestilence.005
+			}
+		}
+	}
+}
+
+opPestilence.004 = {
+	type = character_event
+	title = opPestilence.004.t
+	desc = opPestilence.004.desc
+
+	cooldown = { years = 10 }
+
+	theme = secret
+	override_background = throne_room
+	left_portrait = {
+		character = ROOT
+		animation = disgust
+	}
+
+	trigger = {
+		scope:infectedProvince = {
+			has_province_modifier = opModProvPestilenceMinor
+		}
+	}
+
+	immediate = {
+		random_realm_province = {
+			limit = {
+				OR = {
+					has_holding_type = city_holding # ...which is a City
+					has_holding_type = tribal_holding		# or a tribe
+				}
+			}
+			add_province_modifier = {
+				modifier = opModProvPestilenceMinor
+				days = 1095
+			}
+			save_scope_as = infectedProvince
+			save_scope_as = firstInfectedProvince
+		}
+		if = {
+			limit = {
+				employs_court_position = court_physician_court_position
+				any_court_position_holder = {
+					type = court_physician_court_position
+					is_available_ai_adult = yes
+				}
+			}
+			random_court_position_holder = {
+				type = court_physician_court_position
+				limit = {
+					is_available_ai_adult = yes
+				}
+				save_scope_as = physician
+			}
+		}
+	}
+
+	# let us hope it doesn't get worse
+	option = {
+		name = opPestilence.002.a
+
+	}
+
+	# quarantine the city
+	option = {
+		name = opPestilence.002.b
+		scope:infectedProvince = {
+			add_province_modifier = {
+				modifier = opModProvPestilenceQuarantine
+				days = 1095
+			}
+		}
+	}
+
+	# send court physician to investigate
+	option = {
+		name = opPestilence.002.c
+
+		trigger = {
+			employs_court_position = court_physician_court_position
+			any_court_position_holder = {
+				type = court_physician_court_position
+				is_available_ai_adult = yes
+			}
+		}
+
+	}
+
+	## TODO trigger hidden event, and THAT one decides the next step
+	after = {
+		hidden_effect = {
+			trigger_event = {
+				id = opPestilence.003
+				years = 2
+			}
+		}
+	}
+}
