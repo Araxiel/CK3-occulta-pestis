@@ -1,0 +1,30 @@
+namespace = opDirector
+
+opDirector.005 = {
+	hidden = yes
+
+	immediate = {
+		random_list = {
+			30 = {
+				modifier = {
+					scope:infectedProvince = {
+						has_province_modifier = opModProvPestilenceQuarantine
+					}
+					factor = 3
+				}
+				modifier = {
+					scope:infectedProvince = {
+						has_province_flag = opModPestilenceReduced
+					}
+					factor = 3
+				}
+			}
+			30 = {	# pestilence spreads
+				trigger_event = opPestilence.004
+			}
+			30 = {	# pestilence get's worse
+				trigger_event = opPestilence.005
+			}
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\logs"
+		},
+		{
+			"path": "Workshop"
+		},
+		{
+			"path": "GitRepo/OccultaPestis"
+		}
+	],
+	"settings": {
+		"hoi4ModUtilities.modFile": "c:\\Users\\fireo\\Documents\\Paradox Interactive\\Crusader Kings III\\Modding\\Occulta Pestis\\GitRepo\\OccultaPestis\\descriptor.mod"
+	}
+}

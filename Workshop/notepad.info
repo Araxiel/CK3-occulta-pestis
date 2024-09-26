@@ -1,0 +1,23 @@
+
+		random_list = {
+			30 = {
+				modifier = {
+					scope:infectedProvince = {
+						has_province_modifier = opModPestilenceQuarantine
+					}
+					factor = 3
+				}
+			}
+			30 = {	# pestilence spreads
+				trigger_event = {
+					id = opPestilence.003
+					years = 2
+				}
+			}
+			30 = {	# pestilence get's worse
+				trigger_event = {
+					id = opPestilence.004
+					years = 2
+				}
+			}
+		}

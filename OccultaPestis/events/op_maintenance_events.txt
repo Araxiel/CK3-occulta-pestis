@@ -12,3 +12,31 @@ opMaintenance.003 = {
 		debug_log = "Maintenance event 003 fired"
 	}
 }
+
+opMaintenance.011 = {
+	type = character_event
+	title = opMaintenance.011.t
+	desc = opMaintenance.011.desc
+
+	theme = secret
+	override_background = throne_room
+	left_portrait = {
+		character = ROOT
+		animation = disgust
+	}
+
+	immediate = {
+		title:b_gustalla = {
+			add_province_modifier = {
+				modifier = opModProvPestilenceMinor
+				days = 1095
+			}
+		}
+	}
+
+	option = {
+		name = opMaintenance.011.a
+
+	}
+
+}

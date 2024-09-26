@@ -7,5 +7,5 @@ tags={
 	"Gameplay"
 }
 name="Occulta Pestis"
-supported_version="1.6.1.2"
+supported_version="1.7.*"
 path="C:/Users/fireo/Documents/Paradox Interactive/Crusader Kings III/mod/OccultaPestis"
